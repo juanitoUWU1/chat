@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.js"></script>
+    <style>
+        .mensaje {
+            display: none;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+        .mensaje.exito {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .mensaje.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .mensaje.superior {
+            top: 0;
+        }
+        .mensaje.inferior {
+            bottom: 0;
+        }
+        .botones-inline {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .botones-inline button {
+            padding: 5px 15px;
+            font-size: 14px;
+        }
+        .boton-rojo {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .boton-rojo:hover {
+            background-color: #f5c6cb;
+        }
+        #usuarios-en-linea {
+            margin-top: 15px;
+        }
+        #usuarios-en-linea ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #usuarios-en-linea li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="panel-bienvenida">
+        <h2>Ingrese su nombre de usuario y contraseña:</h2>
+        <input type="text" id="usuario-nombre" placeholder="Ingresa tu usuario">
+        <input type="password" id="usuario-password" placeholder="Ingresa tu contraseña">
+        <div class="botones-inline">
+            <button onclick="registrarse()">Registrar</button>
+            <button onclick="ingresarAlChat()">Ingresar</button>
+        </div>
+    </div>
+    
+    <div id="app-chat" style="display:none;">
+        <div id="estado-conexiones" class="nube box"> <h4>Chat en vivo</h4>
+            <div id="usuarios-en-linea">
+                <h4>Usuarios en línea:</h4>
+                <ul id="lista-usuarios"></ul>
+            </div>
+        </div>
+        <div id="ventana-mensajes">
+            <div id="output"></div>
+            <div id="escribiendo-mensaje"></div>
+        </div>
+        <input type="text" id="usuario" readonly>
+        <input type="text" id="mensaje">
+        <div class="botones-inline">
+            <button id="enviar">Enviar</button>
+            <button class="boton-rojo" onclick="salirDelChat()">Salir</button>
+        </div>
+    </div>    
+
+    <div id="mensaje-alerta" class="mensaje superior"></div>
+
+    <script src="/chat.js"></script>
+</body>
+</html>
+
